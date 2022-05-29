@@ -4,15 +4,8 @@ COPY . /workspace
 
 WORKDIR /workspace
 
+RUN apt-get update && apt-get install -y dos2unix
+
+RUN dos2unix qa/start_test_server.sh
+
 RUN pip install -r requirements.txt
-
-ARG DJANGO_SUPERUSER_USERNAME
-ARG DJANGO_SUPERUSER_EMAIL
-ARG DJANGO_SUPERUSER_PASSWORD
-
-ENV DJANGO_SUPERUSER_USERNAME ${DJANGO_SUPERUSER_USERNAME}
-ENV DJANGO_SUPERUSER_EMAIL ${DJANGO_SUPERUSER_EMAIL}
-ENV DJANGO_SUPERUSER_PASSWORD ${DJANGO_SUPERUSER_PASSWORD}
-
-RUN python manage.py migrate && \
-    python manage.py createsuperuser --no-input
