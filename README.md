@@ -3,21 +3,31 @@ Example REST Application
 
 # Testing
 
-### Build server docker image:
-```
-docker build . -f .\docker\Dockerfile -t app-server
-```
-
-### Create `superuser.env`:
+### Create environment variables:
+`superuser.env`
 ```
 DJANGO_SUPERUSER_USERNAME=admin
 DJANGO_SUPERUSER_EMAIL=admin@example.com
 DJANGO_SUPERUSER_PASSWORD=admin
 ```
 
-### Run server
+and `postgres.env`:
 ```
-docker run -p 8000:8000 -w /workspace --env-file superuser.env --rm -d docker.io/library/app-server bash qa/start_test_server.sh
+POSTGRES_DB=postgres
+POSTGRES_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+```
+
+### Build docker images for the services
+```
+docker-compose -f docker/docker-compose.yml build
+```
+
+### Run the system
+Specifying the number N of REST server instances.
+```
+docker-compose -f docker/docker-compose.yml up --scale web=N
 ```
 
 ### Run tests

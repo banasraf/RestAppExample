@@ -70,23 +70,3 @@ class Client:
   def delete(self, endpoint):
     response = requests.delete(self.url + endpoint, auth=_current_auth)
     _validate_response(response)
-
-  
-
-  # def create_user(self, endpoint)
-  
-    
-
-# client = Client('http://localhost:8000/')
-
-
-
-
-# # client.post('users/', {'username': 'user2', 'password': 'pass1', 'email': 'u@mail.com'})
-
-# with auth_as('admin', 'admin'):
-#   for user in client.get_contents('users/'):
-#     print(user)
-
-#   # client.delete('users/7/')
-

@@ -29,7 +29,8 @@ if __name__ == '__main__':
       client.register_user(**user)
 
     get_users = list(client.get_users())
-    get_users_info = list(map(lambda json: {'username': json['username'], 'email': json['email']}, get_users))
+    get_users_info = list(map(lambda json: {'username': json['username'], 'email': json['email']},
+                          get_users))
     for user in users:
       assert {'username': user['username'],
               'email': user['email']} in get_users_info
